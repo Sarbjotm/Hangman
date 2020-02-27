@@ -111,15 +111,42 @@ def display_word():
 		print(word_guessed[i], end = " ");
 
 
-word = "banana";
-word_guessed = [];
-letters_guessed = [];
-incorrect_guesses = 0;
+def main():
+	global word;
+	word = "banana"
+	global word_guessed;
+	word_guessed = [];
+	global letters_guessed;
+	letters_guessed = [];
+	global incorrect_guesses;
+	incorrect_guesses = 0;
 
 
-while(incorrect_guesses <= 6):
-	drawing_man();
-	display_word();
-	printing_guessed_letters()	
-	guessing_letter();
-	correct_letter();
+	while(incorrect_guesses < 6):
+		drawing_man();
+		display_word();
+		printing_guessed_letters()	
+		guessing_letter();
+		correct_letter();
+
+	play_again = ['y', 'yes', 'n', 'no'];
+	if(incorrect_guesses == 6):
+		while True: 
+			again = input("You have lost. Play Again?" );
+			if not again.isalpha():
+				print("Not valid answer, try again: ");
+				continue;
+			elif (again.islower() in play_again):
+				if(again.islower() == play_again[0] or again.islower() == play_again[1]):
+					main();
+				else:
+					exit();
+			else:
+				print("Not a valid answer, try again: ");
+				continue;
+			
+
+main();
+
+
+	
