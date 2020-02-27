@@ -1,8 +1,9 @@
 
 def guessing_letter():
+	print("\n");
 	while True:
 		global guess;
-		guess = input("What letter do you guess: ");
+		guess = input("What letter do you want to guess: ");
 		if not guess.isalpha():
 			print("Try Again. \n");
 			continue;
@@ -31,23 +32,94 @@ def correct_letter():
 			if word[i] == guess:
 				word_guessed[i] = guess;
 	return;
-			
+
+
+def drawing_man():
+	if (incorrect_guesses == 0):
+				print("____________");
+				print("|	 |");
+				print( "|");
+				print( "|");
+				print( "|");
+				print ("|");
+				print ("|________", end = " ");
+	if (incorrect_guesses == 1):
+				print ("_________")
+				print ("|	 |")
+				print ("|	 O")
+				print ("|")
+				print ("|")
+				print ("|")
+				print ("|________", end = " ")
+	elif (incorrect_guesses == 2):
+			print ("_________")
+			print ("|	 |")
+			print ("|	 O")
+			print ("|	 |")
+			print ("|	 |")
+			print ("|")
+			print ("|________", end = " ")
+	elif (incorrect_guesses == 3):
+			print ("_________")
+			print ("|	 |")
+			print ("|	 O")
+			print ("|	\\|")
+			print ("|	 |")
+			print ("|")
+			print ("|________")
+	elif (incorrect_guesses == 4):
+			print ("_________")
+			print ("|	 |")
+			print ("|	 O")
+			print ("|	\\|/")
+			print ("|	 |")
+			print ("|")
+			print ("|________", end = " ")
+	elif (incorrect_guesses == 5):
+			print ("_________")
+			print ("|	 |")
+			print ("|	 O")
+			print ("|	\\|/")
+			print ("|	 |")
+			print ("|	/ ")
+			print ("|________", end = " ")
+	elif (incorrect_guesses == 6):
+			print ("_________")
+			print ("|	 |")
+			print ("|	 O")
+			print ("|	\\|/")
+			print ("|	 |")
+			print ("|	/ \\");
+			print ("|________", end = " ")
+
+
+
+def printing_guessed_letters():
+	print("\n");
+	print("You have guessed: the letters: ", end = " ");
+	for i in range(0,len(letters_guessed)):
+		print(letters_guessed[i], end = " ");
+
+
+def display_word():
+	if len(word_guessed) == 0:
+		for i in range(0,len(word)):
+			word_guessed.append("_");
+
+	print("\t", end = " ");
+	for i in range(0,len(word)):
+		print(word_guessed[i], end = " ");
+
 
 word = "banana";
 word_guessed = [];
 letters_guessed = [];
 incorrect_guesses = 0;
 
-for i in range(0,len(word)):
-	word_guessed.append('_');
-	print(word_guessed[i], end =" ");
 
-print("\n");
-
-
-while(incorrect_guesses < 5):
+while(incorrect_guesses <= 6):
+	drawing_man();
+	display_word();
+	printing_guessed_letters()	
 	guessing_letter();
 	correct_letter();
-	print(word_guessed);
-	print(incorrect_guesses);
-
