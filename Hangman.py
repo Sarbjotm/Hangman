@@ -44,7 +44,7 @@ def drawing_man():
 				print ("|")
 				print ("|________", end = " ")
 	if (incorrect_guesses == 1):
-				print ("_________")
+				print("____________")
 				print ("|	 |")
 				print ("|	 O")
 				print ("|")
@@ -52,7 +52,7 @@ def drawing_man():
 				print ("|")
 				print ("|________", end = " ")
 	elif (incorrect_guesses == 2):
-			print ("_________")
+			print("____________")
 			print ("|	 |")
 			print ("|	 O")
 			print ("|	 |")
@@ -60,15 +60,15 @@ def drawing_man():
 			print ("|")
 			print ("|________", end = " ")
 	elif (incorrect_guesses == 3):
-			print ("_________")
+			print("____________")
 			print ("|	 |")
 			print ("|	 O")
 			print ("|	\\|")
 			print ("|	 |")
 			print ("|")
-			print ("|________")
+			print ("|________", end = " ")
 	elif (incorrect_guesses == 4):
-			print ("_________")
+			print("____________")
 			print ("|	 |")
 			print ("|	 O")
 			print ("|	\\|/")
@@ -76,7 +76,7 @@ def drawing_man():
 			print ("|")
 			print ("|________", end = " ")
 	elif (incorrect_guesses == 5):
-			print ("_________")
+			print("____________")
 			print ("|	 |")
 			print ("|	 O")
 			print ("|	\\|/")
@@ -84,7 +84,7 @@ def drawing_man():
 			print ("|	/ ")
 			print ("|________", end = " ")
 	elif (incorrect_guesses == 6):
-			print ("_________")
+			print("____________")
 			print ("|	 |")
 			print ("|	 O")
 			print ("|	\\|/")
@@ -110,6 +110,8 @@ def display_word():
 	for i in range(0,len(word)):
 		print(word_guessed[i], end = " ")
 
+def clear():
+	os.system("clear")
 
 def main():
 	global word
@@ -128,10 +130,14 @@ def main():
 		printing_guessed_letters()	
 		guessing_letter()
 		correct_letter()
+		clear()
 
 	if(incorrect_guesses == 6):
+		drawing_man()
+		display_word()
+		printing_guessed_letters()	
 		while True: 
-			again = input("You have lost. Play Again?" )
+			again = input("\nYou have lost. Play Again? Answer Yes(y) or No(n): " )
 			if not again.isalpha():
 				print("Not valid answer, try again: ")
 				continue
@@ -143,7 +149,8 @@ def main():
 				print("Not a valid answer, try... again: ")
 				continue
 				
-
+import os
+import time
 main()
 
 
