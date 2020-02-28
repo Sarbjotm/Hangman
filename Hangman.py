@@ -15,7 +15,9 @@ def guessing_letter():
 			else:
 				guess = guess.lower()
 				if (guess in letters_guessed):
-					print("You have guessed that letter, try again: ")
+					print("You have guessed that letter")
+					printing_guessed_letters()
+					print("\n")
 					continue
 
 				letters_guessed.append(guess)
@@ -96,7 +98,7 @@ def drawing_man():
 
 def printing_guessed_letters():
 	print("\n")
-	print("You have guessed: the letters: ", end = " ")
+	print("You have guessed the letters: ", end = " ")
 	for i in range(0,len(letters_guessed)):
 		print(letters_guessed[i], end = " ")
 
@@ -112,6 +114,12 @@ def display_word():
 
 def clear():
 	os.system("clear")
+
+def check_if_win():
+	for i in range(0,len(word)):
+		if(word_guessed[i] != word[i]):
+			return 0
+	return 1
 
 def main():
 	global word
@@ -130,7 +138,9 @@ def main():
 		printing_guessed_letters()	
 		guessing_letter()
 		correct_letter()
-		clear()
+		if (check_if_win()):
+			break
+		clear()	
 
 	if(incorrect_guesses == 6):
 		drawing_man()
@@ -148,6 +158,25 @@ def main():
 			else:
 				print("Not a valid answer, try... again: ")
 				continue
+	else:
+		clear()
+		drawing_man()
+		display_word()
+		printing_guessed_letters()	
+		while True: 
+			again = input("\nYou have won! Play Again? Answer Yes(y) or No(n): " )
+			if not again.isalpha():
+				print("Not valid answer, try again: ")
+				continue
+			elif(again.lower() == "yes" or again.lower() == "y"):
+				clear()
+				main()
+			elif (again.lower() == "no" or again.lower() == "n"):
+				exit()
+			else:
+				print("Not a valid answer, try... again: ")
+				continue
+
 				
 import os
 import time
