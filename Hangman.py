@@ -123,14 +123,29 @@ def check_if_win():
 
 def main():
 	global word
-	word = "banana"
+	while True:
+		category = input("What word category would you like to use, Nouns, Verbs or Adjectives: ")
+		if not category.isalpha():
+			print("Not a Valid Answer, try again: ")
+			continue
+		elif (category.lower() == "nouns" or category.lower() == "verbs" or category.lower() == "adjectives"):
+			break
+		else:
+			print("Enter nouns, verbs or adjectives, try again: ")
+			continue
+
+	
+
 	global word_guessed
 	word_guessed = []
 	global letters_guessed
 	letters_guessed = []
 	global incorrect_guesses
 	incorrect_guesses = 0
-
+	line_number = random.randint(1,50)
+	word = linecache.getline(category+".txt", line_number)
+	word = word.strip("\n")
+	#print("The word is: ", word) #Used for Testing
 
 	while(incorrect_guesses < 6):
 		drawing_man()
@@ -147,7 +162,7 @@ def main():
 		display_word()
 		printing_guessed_letters()	
 		while True: 
-			again = input("\nYou have lost. Play Again? Answer Yes(y) or No(n): " )
+			again = input("\nYou have lost. The word was " + '\033[1m' + word + '\033[0m' + ". Play Again? Answer Yes(y) or No(n): " )
 			if not again.isalpha():
 				print("Not valid answer, try again: ")
 				continue
@@ -156,7 +171,7 @@ def main():
 			elif (again.lower() == "no" or again.lower() == "n"):
 				exit()
 			else:
-				print("Not a valid answer, try... again: ")
+				print("Not a valid answer, try again: ")
 				continue
 	else:
 		clear()
@@ -170,16 +185,19 @@ def main():
 				continue
 			elif(again.lower() == "yes" or again.lower() == "y"):
 				clear()
+				linecache.clearcache()
 				main()
 			elif (again.lower() == "no" or again.lower() == "n"):
+				linecache.clearcache()
 				exit()
 			else:
-				print("Not a valid answer, try... again: ")
+				print("Not a valid answer, try again: ")
 				continue
 
 				
 import os
-import time
+import random
+import linecache
 main()
 
 
