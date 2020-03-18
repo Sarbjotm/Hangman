@@ -5,22 +5,45 @@ def guessing_letter():
 		global guess
 		guess = input("What letter do you want to guess: ")
 		if not guess.isalpha():
-			print("Try Again. \n")
+			print("That is not a character, try again \n")
+			time.sleep(0.5)
+			clear()
+			drawing_man()
+			display_word()
+			printing_guessed_letters()
+			print("\nReminder your category is: ", category)
+			print("\n")
 			continue
 
 		else:
 			if (len(guess) > 1):
 				print("This is not a single letter, try again: ")
+				time.sleep(0.5)
+				clear()
+				drawing_man()
+				display_word()
+				printing_guessed_letters()
 				continue
 			else:
 				guess = guess.lower()
 				if (guess in letters_guessed):
 					print("You have guessed that letter")
+					time.sleep(2)
+					clear()
+					drawing_man()
+					display_word()
 					printing_guessed_letters()
+					print("\nReminder your category is: ", category)
 					print("\n")
 					continue
 
-				letters_guessed.append(guess)
+				letters_guessed.append(guess)		
+				for i in range(0, len(letters_guessed)):
+					for j in range(i+1,len(letters_guessed)):
+						if letters_guessed[i] > letters_guessed[j]:
+							tmp = letters_guessed[i]
+							letters_guessed[i] = letters_guessed[j]
+							letters_guessed[j] = tmp
 				break
 
 def correct_letter():
@@ -122,6 +145,7 @@ def check_if_win():
 	return 1
 
 def main():
+	global category
 	global word
 	while True:
 		category = input("What word category would you like to use, Nouns, Verbs or Adjectives: ")
@@ -150,7 +174,8 @@ def main():
 	while(incorrect_guesses < 6):
 		drawing_man()
 		display_word()
-		printing_guessed_letters()	
+		printing_guessed_letters()
+		print("\nReminder your category is: ", category)	
 		guessing_letter()
 		correct_letter()
 		if (check_if_win()):
@@ -167,6 +192,7 @@ def main():
 				print("Not valid answer, try again: ")
 				continue
 			elif(again.lower() == "yes" or again.lower() == "y"):
+				clear()
 				main()
 			elif (again.lower() == "no" or again.lower() == "n"):
 				exit()
@@ -198,6 +224,8 @@ def main():
 import os
 import random
 import linecache
+import time
+clear()
 main()
 
 
